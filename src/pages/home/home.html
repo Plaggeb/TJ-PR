@@ -1,17 +1,66 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar text-center>
+    <img src="../../assets/imgs/Towejazz_logo.jpg" alt="TowerJazz" style="height: 25%; width: 25%;">
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding >
+  
+  <ion-refresher (ionRefresh)="onRefresher($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <form [formGroup]="approvalForm" (ngSubmit)="onSubmit()" *ngIf="approvalForm != null">
+    <ion-list no-padding no-margin>
+      <button ion-item small (click)="onSetCodeAndGroup()">
+        <ion-row no-padding no-margin>
+          <ion-col><p style="font-size: 10px">Release Code: {{ relCode }}</p></ion-col>
+          <ion-col><p style="font-size: 10px">Release Group: {{ relGroup }}</p></ion-col>
+        </ion-row>
+      </button>
+    </ion-list>
+    
+    <ion-row>
+      <ion-col text-left>
+        <button *ngIf="!selectAll" ion-button small clear (click)="onSelectAll()">SELECT ALL</button>
+        <button *ngIf="selectAll" ion-button small clear (click)="onSelectAll()">UNSELECT ALL</button>
+      </ion-col>
+      <ion-col text-right>
+        <button ion-button small block color="secondary">APPROVE</button>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-list formArrayName="requisitions" *ngIf="PRs.length > 0">
+      <ion-item-sliding *ngFor="let prControl of approvalForm.get('requisitions').controls; let i = index">
+        <ion-item >
+          <ion-label>{{ PRs[i].PREQ_NO }} {{ PRs[i].PREQ_ITEM }}
+              <h3>{{ PRs[i].SHORT_TEXT }}</h3>
+              <p>{{ PRs[i].PREQ_NAME }}</p>
+                <ion-row >
+                  <ion-col col-2 class="ion-item-label"><p>{{ PRs[i].QUANTITY }} {{ PRs[i].UNIT }}</p></ion-col>
+                  <ion-col class="ion-item-label"><p>{{ PRs[i].C_AMT_BAPI | currency }} {{ PRs[i].CURRENCY }}</p></ion-col>
+                </ion-row>
+          </ion-label>
+          <ion-checkbox [formControlName]="i" [checked]="selectAll" dark></ion-checkbox>
+        </ion-item>
+
+        <ion-item-options side="right" (ionSwipe)="onDetails(i)">
+          <button ion-button expandable color="primary" (click)="onDetails(i)">
+            <ion-icon name="ios-information-circle-outline" sytle="font-size: 25px;"></ion-icon>
+            DETAILS
+          </button>
+        </ion-item-options>
+
+        <ion-item-options side="left" (ionSwipe)="onApproval(i)">
+          <button ion-button expandable color="secondary" (click)="onApproval(i)">
+            <ion-icon name="md-checkmark" sytle="font-size: 25px;"></ion-icon>
+            APPROVE
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+  </form>
+
 </ion-content>
