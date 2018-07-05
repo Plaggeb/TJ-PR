@@ -1,6 +1,19 @@
 <ion-header>
+
   <ion-navbar text-center>
-    <img src="../../assets/imgs/Towejazz_logo.jpg" alt="TowerJazz" style="height: 25%; width: 25%;">
+      <ion-buttons start>
+          <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-buttons>
+        <!-- <ion-buttons end>
+          <button ion-button icon-only (click)="onPopover($event)">
+            <ion-icon name="more"></ion-icon>
+          </button>
+        </ion-buttons> -->
+    <ion-title>TJ PR Approval
+        <!-- <img src="../../assets/imgs/Towejazz_logo.jpg" alt="TowerJazz" style="height: 50%; width: 50%;"> -->
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -10,16 +23,16 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <form [formGroup]="approvalForm" (ngSubmit)="onSubmit()" *ngIf="approvalForm != null">
     <ion-list no-padding no-margin>
-      <button ion-item small (click)="onSetCodeAndGroup()">
+      <button ion-item small (click)="onNewCriteria()">
         <ion-row no-padding no-margin>
-          <ion-col><p style="font-size: 10px">Release Code: {{ relCode }}</p></ion-col>
-          <ion-col><p style="font-size: 10px">Release Group: {{ relGroup }}</p></ion-col>
+          <ion-col><p style="font-size: 10px">Approval Code: {{ relCode }}</p></ion-col>
+          <!-- <ion-col><p style="font-size: 10px">Approval Group: {{ relGroup }}</p></ion-col> -->
         </ion-row>
       </button>
     </ion-list>
-    
+
+  <form [formGroup]="approvalForm" (ngSubmit)="onSubmit()" *ngIf="approvalForm != null">
     <ion-row>
       <ion-col text-left>
         <button *ngIf="!selectAll" ion-button small clear (click)="onSelectAll()">SELECT ALL</button>
@@ -33,7 +46,85 @@
 
     <ion-list formArrayName="requisitions" *ngIf="PRs.length > 0">
       <ion-item-sliding *ngFor="let prControl of approvalForm.get('requisitions').controls; let i = index">
-        <ion-item >
+        <ion-item>
+            <ion-label class="ion-item-label {{fontSize}}">
+              <ion-grid>
+                <ion-row *ngIf="displayData.documentType || displayData.plant">
+                    <ion-col col-auto *ngIf="displayData.documentType && showFieldNames">Doc. Type: </ion-col>
+                    <ion-col col-auto *ngIf="displayData.documentType"><p>{{ PRs[i].DOC_TYPE }}</p></ion-col>
+
+                    <ion-col col-auto *ngIf="displayData.plant && showFieldNames">Plant: </ion-col>
+                    <ion-col col-auto *ngIf="displayData.plant"><p>{{ PRs[i].PLANT }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.accountAssignment || displayData.itemCategory">
+                    <ion-col col-auto *ngIf="displayData.accountAssignment && showFieldNames">Acc. Asst.: </ion-col>
+                    <ion-col col-auto *ngIf="displayData.accountAssignment"><p>{{ PRs[i].ACCTASSCAT }}</p></ion-col>
+
+                    <ion-col col-auto *ngIf="displayData.itemCategory && showFieldNames">Item Cat.: </ion-col>
+                    <ion-col col-auto *ngIf="displayData.itemCategory"><p>{{ PRs[i].ITEM_CAT_EXT }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.prNumber">
+                    <ion-col col-auto *ngIf="showFieldNames">PR #: </ion-col>
+                    <ion-col col-auto ><p>{{ PRs[i].PREQ_NO }}</p></ion-col>
+                    
+                    <ion-col col-auto *ngIf="displayData.prLine && showFieldNames">Line #: </ion-col>
+                    <ion-col col-auto *ngIf="displayData.prLine"><p>{{ PRs[i].PREQ_ITEM }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.materialNumber">
+                    <ion-col col-auto *ngIf="showFieldNames">Mat. #: </ion-col>
+                    <ion-col col-auto nowrap><p>{{ PRs[i].MATERIAL }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.description">
+                    <ion-col col-auto *ngIf="showFieldNames">Desc.: </ion-col>
+                    <ion-col col-auto nowrap><p>{{ PRs[i].SHORT_TEXT }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.requisitioner">
+                    <ion-col col-auto *ngIf="showFieldNames">Requestor: </ion-col>
+                    <ion-col col-auto ><p>{{ PRs[i].PREQ_NAME }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.quantity || displayData.amount">
+                    <ion-col col-auto *ngIf="displayData.quantity && showFieldNames">Qty: </ion-col>
+                    <ion-col col-auto *ngIf="displayData.quantity"><p>{{ PRs[i].QUANTITY }} {{ PRs[i].UNIT }}</p></ion-col>
+                    <ion-col col-auto *ngIf="displayData.amount && showFieldNames">Total: </ion-col>
+                    <ion-col col-auto *ngIf="displayData.amount"><p>{{ PRs[i].C_AMT_BAPI * PRs[i].QUANTITY | currency }} {{ PRs[i].CURRENCY }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.desiredVendor">
+                    <ion-col col-auto *ngIf="showFieldNames">Des. Vendor: </ion-col>
+                    <ion-col col-auto><p>{{ PRs[i].DES_VENDOR }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.fixedVendor">
+                    <ion-col col-auto *ngIf="showFieldNames">Fixed Vendor: </ion-col>
+                    <ion-col col-auto><p>{{ PRs[i].FIXED_VEND }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.commitmentItem">
+                    <ion-col col-auto *ngIf="showFieldNames">Cmmt. Item: </ion-col>
+                    <ion-col col-auto><p>{{ PRs[i].CMMT_ITEM }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.fundsCenter">
+                    <ion-col col-auto *ngIf="showFieldNames">Funds Ctr.: </ion-col>
+                    <ion-col col-auto><p>{{ PRs[i].FUNDS_CTR }}</p></ion-col>
+                </ion-row>
+
+                <ion-row *ngIf="displayData.budget">
+                    <ion-col col-auto *ngIf="showFieldNames">Budget: </ion-col>
+                    <ion-col col-auto><p>{{ PRs[i].C_AMT_BAPI | currency }} {{ PRs[i].CURRENCY }}</p></ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-label>
+            
+          <ion-checkbox [formControlName]="i" [checked]="selectAll" dark></ion-checkbox>
+        </ion-item>
+        <!-- <ion-item >
           <ion-label>{{ PRs[i].PREQ_NO }} {{ PRs[i].PREQ_ITEM }}
               <h3>{{ PRs[i].SHORT_TEXT }}</h3>
               <p>{{ PRs[i].PREQ_NAME }}</p>
@@ -43,17 +134,17 @@
                 </ion-row>
           </ion-label>
           <ion-checkbox [formControlName]="i" [checked]="selectAll" dark></ion-checkbox>
-        </ion-item>
+        </ion-item> -->
 
         <ion-item-options side="right" (ionSwipe)="onDetails(i)">
-          <button ion-button expandable color="primary" (click)="onDetails(i)">
+          <button type="button" ion-button expandable color="primary" (click)="onDetails(i)">
             <ion-icon name="ios-information-circle-outline" sytle="font-size: 25px;"></ion-icon>
             DETAILS
           </button>
         </ion-item-options>
 
         <ion-item-options side="left" (ionSwipe)="onApproval(i)">
-          <button ion-button expandable color="secondary" (click)="onApproval(i)">
+          <button type="button" ion-button expandable color="secondary" (click)="onApproval(i)">
             <ion-icon name="md-checkmark" sytle="font-size: 25px;"></ion-icon>
             APPROVE
           </button>

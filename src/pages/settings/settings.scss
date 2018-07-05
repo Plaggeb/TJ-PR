@@ -1,0 +1,26 @@
+page-settings {
+    .TEXT-SMALL, .TEXT-SMALL p {
+        font-size: 12px !important;
+    }
+
+    .TEXT-MEDIUM, .TEXT-MEDIUM p {
+        font-size: 14px !important;
+    }
+
+    .TEXT-LARGE, .TEXT-LARGE p {
+        font-size: 16px !important;
+    }
+
+    ion-row {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    ion-col {
+        margin: 0 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 2px !important;
+    }
+}

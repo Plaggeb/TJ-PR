@@ -35,12 +35,28 @@ $item-wp-detail-push-show: true;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary:    #0062B1,
+  //primary:    #488aff,
+  secondary:  (
+    base: #FFB73C,
+    contrast: #FFFFFF
+  ),
+  //secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
 );
+
+$toolbar-md-title-text-color:   #0062B1;
+$toolbar-ios-title-text-color:  #0062B1;
+$toolbar-wp-title-text-color:   #0062B1;
+
+$text-color: #0062B1;
+
+$toggle-md-background-color-on:  #FFB73C;
+$toggle-ios-background-color-on: #FFB73C;
+$toggle-wp-background-color-on:  #FFB73C;
+
 
 
 // App iOS Variables
@@ -87,3 +103,8 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+body {
+  color: #0062B1
+}

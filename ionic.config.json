@@ -4,5 +4,31 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "proxies": [
+    {
+      "path": "/BAPI_REQUISITION_GETITEMSREL",
+      "proxyUrl": "http://mhvmsapsnx.saphere.corp.towersemi.com:8000/sap/bc/rest/restjson/BAPI_REQUISITION_GETITEMSREL"
+    },
+    {
+      "path": "/BAPI_REQUISITION_GETDETAIL",
+      "proxyUrl": "http://mhvmsapsnx.saphere.corp.towersemi.com:8000/sap/bc/rest/restjson/BAPI_REQUISITION_GETDETAIL"
+    },
+    {
+      "path": "/BAPI_REQUISITION_RELEASE",
+      "proxyUrl":"http://mhvmsapsnx.saphere.corp.towersemi.com:8000/sap/bc/rest/restjson/BAPI_REQUISITION_RELEASE"
+    },
+    {
+      "path": "/TVKO_SINGLE_READ",
+      "proxyUrl": "http://mhvmsapsnx.saphere.corp.towersemi.com:8000/sap/bc/rest/restjson/TVKO_SINGLE_READ"
+    },
+    {
+      "path": "/auth",
+      "proxyUrl": "https://api.towerjazz.com/auth"
+    },
+    {
+      "path": "/rs",
+      "proxyUrl": "https://api.towerjazz.com/fab3/rs"
+    }
+  ]
 }

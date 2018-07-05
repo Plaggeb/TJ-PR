@@ -1,8 +1,8 @@
 {
   "name": "TJ-PR",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Brandon Plagge",
+  "homepage": "http://www.towerjazz.com",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -42,18 +42,17 @@
     "@ionic/app-scripts": "3.1.8",
     "typescript": "~2.6.2"
   },
-  "description": "An Ionic project",
+  "description": "TowerJazz FAB9 Application",
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "ios"
     ]
   }
 }

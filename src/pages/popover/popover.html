@@ -1,0 +1,70 @@
+<ion-content no-padding>
+    <form [formGroup]="settingsForm">
+      <ion-list no-padding>
+        <ion-item >
+          Font Size
+          <ion-segment formControlName='fontSize' (ionChange)="segmentChanged($event)">
+              <ion-segment-button class='TEXT-SMALL' value="TEXT-SMALL">A</ion-segment-button>
+              <ion-segment-button class='TEXT-MEDIUM' value="TEXT-MEDIUM">A</ion-segment-button>
+              <ion-segment-button class='TEXT-LARGE' value="TEXT-LARGE">A</ion-segment-button>
+          </ion-segment>
+        </ion-item>
+  
+        <ion-item >
+          <ion-label>Document Type</ion-label>
+          <ion-toggle block formControlName='docType' id='documentType' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Plant</ion-label>
+          <ion-toggle formControlName='plant' id='plant' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Account Assignment</ion-label>
+          <ion-toggle formControlName='accountAssignment' id='accountAssignment' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Item Category</ion-label>
+          <ion-toggle formControlName='itemCategory' id='itemCategory' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>PR Number</ion-label>
+          <ion-toggle formControlName='prNumber' id='prNumber' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>PR Line</ion-label>
+          <ion-toggle formControlName='prLine' id='prLine' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Material Number</ion-label>
+          <ion-toggle formControlName='materialNumber' id='materialNumber' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Description</ion-label>
+          <ion-toggle formControlName='description' id='description' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Requisitioner</ion-label>
+          <ion-toggle formControlName='requisitioner' id='requisitioner' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Quantity</ion-label>
+          <ion-toggle formControlName='quantity' id='quantity' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>Amount</ion-label>
+          <ion-toggle formControlName='amount' id='amount' (ionChange)="onToggle($event)"></ion-toggle>
+        </ion-item>
+      </ion-list>
+    </form>
+  
+  </ion-content>

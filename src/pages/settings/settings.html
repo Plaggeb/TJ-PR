@@ -1,0 +1,184 @@
+<!--
+  Generated template for the SettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Default Settings</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="settingsForm">
+    <ion-list radio-group>
+      <ion-item-divider color="primary"><b>General Settings</b></ion-item-divider>
+      <ion-item>
+        <ion-label>Store SAP Credentials</ion-label>
+        <ion-toggle formControlName='storeSAPCreds' id='storeSAPCreds' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Default Approval Code: </ion-label>
+        <ion-input formControlName='approvalCode' type="text" ></ion-input>
+      </ion-item>
+
+      <ion-item-divider color="primary"><b>PR List Display Settings</b></ion-item-divider>
+
+      <ion-item>
+        Font Size
+        <ion-segment color="secondary" formControlName='fontSize' (ionChange)="segmentChanged($event)">
+            <ion-segment-button class='TEXT-SMALL' value="TEXT-SMALL">A</ion-segment-button>
+            <ion-segment-button class='TEXT-MEDIUM' value="TEXT-MEDIUM">A</ion-segment-button>
+            <ion-segment-button class='TEXT-LARGE' value="TEXT-LARGE">A</ion-segment-button>
+        </ion-segment>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Document Type</ion-label>
+        <ion-toggle formControlName='docType' id='documentType' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Plant</ion-label>
+        <ion-toggle formControlName='plant' id='plant' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Account Assignment</ion-label>
+        <ion-toggle formControlName='accountAssignment' id='accountAssignment' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Item Category</ion-label>
+        <ion-toggle formControlName='itemCategory' id='itemCategory' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>PR Number</ion-label>
+        <ion-toggle formControlName='prNumber' id='prNumber' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>PR Line</ion-label>
+        <ion-toggle formControlName='prLine' id='prLine' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Material Number</ion-label>
+        <ion-toggle formControlName='materialNumber' id='materialNumber' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Description</ion-label>
+        <ion-toggle formControlName='description' id='description' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Requisitioner</ion-label>
+        <ion-toggle formControlName='requisitioner' id='requisitioner' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Quantity</ion-label>
+        <ion-toggle formControlName='quantity' id='quantity' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Amount</ion-label>
+        <ion-toggle formControlName='amount' id='amount' (ionChange)="onToggle($event)"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </form>
+
+</ion-content>
+
+<ion-footer>
+    <ion-list>
+    <ion-item-divider color="primary" style="font-size: 12px;">PR Item Example</ion-item-divider>
+    <ion-item-sliding>
+    <ion-item>
+        <ion-label class="ion-item-label {{fontSize}}">
+          <ion-grid>
+            <ion-row *ngIf="displayData.documentType || displayData.plant">
+                <ion-col col-auto *ngIf="displayData.documentType && showFieldNames">Doc. Type: </ion-col>
+                <ion-col col-auto *ngIf="displayData.documentType"><p>NB</p></ion-col>
+  
+                <ion-col col-auto *ngIf="displayData.plant && showFieldNames">Plant: </ion-col>
+                <ion-col col-auto *ngIf="displayData.plant"><p>1000</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.accountAssignment || displayData.itemCategory">
+                <ion-col col-auto *ngIf="displayData.accountAssignment && showFieldNames">Acc. Asst.: </ion-col>
+                <ion-col col-auto *ngIf="displayData.accountAssignment"><p>K</p></ion-col>
+  
+                <ion-col col-auto *ngIf="displayData.itemCategory && showFieldNames">Item Cat.: </ion-col>
+                <ion-col col-auto *ngIf="displayData.itemCategory"><p>D</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.prNumber">
+                <ion-col col-auto *ngIf="showFieldNames">PR #: </ion-col>
+                <ion-col col-auto ><p>0012345678</p></ion-col>
+                
+                <ion-col col-auto *ngIf="displayData.prLine && showFieldNames">Line #: </ion-col>
+                <ion-col col-auto *ngIf="displayData.prLine"><p>00010</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.materialNumber">
+                <ion-col col-auto *ngIf="showFieldNames">Mat. #: </ion-col>
+                <ion-col col-auto nowrap><p>123456</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.description">
+                <ion-col col-auto *ngIf="showFieldNames">Desc.: </ion-col>
+                <ion-col col-auto nowrap><p>Widget 10 x 10 x 10</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.requisitioner">
+                <ion-col col-auto *ngIf="showFieldNames">Requestor: </ion-col>
+                <ion-col col-auto ><p>Jon.Smith</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.quantity || displayData.amount">
+                <ion-col col-auto *ngIf="displayData.quantity && showFieldNames">Qty: </ion-col>
+                <ion-col col-auto *ngIf="displayData.quantity"><p>5 EA</p></ion-col>
+                <ion-col col-auto *ngIf="displayData.amount && showFieldNames">Total: </ion-col>
+                <ion-col col-auto *ngIf="displayData.amount"><p>$1,000.00 USD</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.desiredVendor">
+                <ion-col col-auto *ngIf="showFieldNames">Des. Vendor: </ion-col>
+                <ion-col col-auto><p>789456</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.fixedVendor">
+                <ion-col col-auto *ngIf="showFieldNames">Fixed Vendor: </ion-col>
+                <ion-col col-auto><p>987654</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.commitmentItem">
+                <ion-col col-auto *ngIf="showFieldNames">Cmmt. Item: </ion-col>
+                <ion-col col-auto><p>8554411</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.fundsCenter">
+                <ion-col col-auto *ngIf="showFieldNames">Funds Ctr.: </ion-col>
+                <ion-col col-auto><p>901300</p></ion-col>
+            </ion-row>
+  
+            <ion-row *ngIf="displayData.budget">
+                <ion-col col-auto *ngIf="showFieldNames">Budget: </ion-col>
+                <ion-col col-auto><p>$10,000.00 USD</p></ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+        
+      <ion-checkbox dark></ion-checkbox>
+    </ion-item>
+  </ion-item-sliding>
+  </ion-list>
+  </ion-footer>

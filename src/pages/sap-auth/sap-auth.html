@@ -1,0 +1,40 @@
+
+<ion-header>
+  <ion-navbar>
+      <ion-buttons start>
+        <button ion-button icon-only menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title>SAP Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-card>
+        <img src="assets/imgs/tjsap.jpg">
+      <ion-card-content>
+          <form [formGroup]="authForm">
+
+              <ion-list>
+                <ion-item>
+                  <ion-label floating>SAP USERNAME</ion-label>
+                  <ion-input type="text" formControlName="username"></ion-input>
+                </ion-item>
+                
+                <ion-item>
+                  <ion-label floating>SAP PASSWORD</ion-label>
+                  <ion-input type="password" formControlName="password"></ion-input>
+                </ion-item>
+                
+                <button ion-button block color="primary" (click)="onLogin()" [disabled]="!authForm.valid">LOGIN</button>
+          
+                <button ion-button block color="danger" (click)="onCancel()">CANCEL</button>
+          
+              </ion-list>
+            </form>      
+      </ion-card-content>  
+    </ion-card>
+  </ion-content>

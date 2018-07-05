@@ -1,0 +1,108 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+        <button ion-button icon-only menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title>TJ PR Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div *ngIf="isDataLoaded">
+
+    
+  <ion-list>
+    <ion-item>PR #:
+      <ion-note>{{ pr }}</ion-note>
+    </ion-item>
+
+    <ion-item>LINE #:
+        <ion-note>{{ prLine }}</ion-note>
+    </ion-item>
+
+    <ion-item>
+        <ion-row>
+            <ion-col>Doc. Type:</ion-col>
+            <ion-col><ion-note>{{ prItem.DOC_TYPE }}</ion-note></ion-col>
+            <ion-col>Plant:</ion-col>
+            <ion-col><ion-note>{{ prItem.PLANT }}</ion-note></ion-col>
+        </ion-row>
+    </ion-item>
+
+    <ion-item>
+        <ion-row>
+            <ion-col>Acct. Asst.:</ion-col>
+            <ion-col><ion-note>{{ prItem.ACCTASSCAT }}</ion-note></ion-col>
+            <ion-col>Item Cat.:</ion-col>
+            <ion-col><ion-note>{{ prItem.ITEM_CAT }}</ion-note></ion-col>
+        </ion-row>
+    </ion-item>
+
+    <ion-item>MATERIAL #:
+        <ion-note>{{ prItem.MATERIAL }}</ion-note>
+    </ion-item>    
+    
+    <button ion-item (click)="onShowDesc()">DESC.:
+        <ion-note>{{ prItem.SHORT_TEXT }}</ion-note>
+    </button>
+    
+    <ion-item>QTY:
+        <ion-note>{{ prItem.QUANTITY }} {{ prItem.UNIT }}</ion-note>
+    </ion-item>    
+    
+    <ion-item>PRICE PER UNIT:
+        <ion-note *ngIf="prItem.CURRENCY != 'ISL'">{{ prItem.PREQ_PRICE | currency }} {{ prItem.CURRENCY }}</ion-note>
+        <ion-note *ngIf="prItem.CURRENCY == 'ISL'">{{ prItem.CURRENCY }} {{ prItem.PREQ_PRICE }}</ion-note>
+    </ion-item>
+    
+    <ion-item>DELI. DATE:
+        <ion-note>{{ prItem.DELIV_DATE }}</ion-note>
+    </ion-item>
+
+    <ion-item>REQUESTOR:
+        <ion-note>{{ prItem.PREQ_NAME }}</ion-note>
+    </ion-item>
+    
+    <ion-item>DESIRED VENDOR:
+        <ion-note>{{ prItem.DES_VENDOR }}</ion-note>
+    </ion-item>
+    
+    <ion-item>FIXED VENDOR:
+        <ion-note>{{ prItem.FIXED_VEND }}</ion-note>
+    </ion-item>
+                        
+    <ion-item>FUNDS CENTER:
+        <ion-note>{{ prAccount.FUNDS_CTR }}</ion-note>
+    </ion-item>
+
+    <ion-item>COMMIT. ITEM:
+        <ion-note>{{ prAccount.CMMT_ITEM }}</ion-note>
+    </ion-item>
+
+    <ion-item>FUND:
+        <ion-note>{{ prAccount.FUND }}</ion-note>
+    </ion-item>
+
+   
+        
+        <ion-card *ngIf="hasJustification">
+            <ion-card-title color="primary">
+                JUSTIFICATION:
+            </ion-card-title>
+            <ion-card-content>
+                <div *ngFor="let text of prItemText">
+                    <p>{{ text.TEXT_LINE }}</p>
+                </div>
+                
+            </ion-card-content>
+        </ion-card>
+
+  </ion-list>
+</div>
+</ion-content>

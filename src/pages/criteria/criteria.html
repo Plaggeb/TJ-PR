@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar text-center>
+        <ion-title>
+            TJ PR Approval
+            <!-- <img src="../../assets/imgs/Towejazz_logo.jpg" alt="TowerJazz" style="height: 50%; width: 50%;"> -->
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="criteriaForm" (ngSubmit)="onSubmit()">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>PR Approval Code</ion-label>
+                <ion-input type="text" formControlName="relCode" maxlength="2"></ion-input>
+            </ion-item>
+            <!-- <ion-item>
+                <ion-label floating>Approval Group</ion-label>
+                <ion-select formControlName="relGroup">
+                    <ion-option *ngFor="let opt of relGroups">{{ opt }}</ion-option>
+                </ion-select>
+            </ion-item> -->
+            <br>
+            <button type="submit" ion-button block color="primary" [disabled]="!criteriaForm.valid">Submit</button>
+            <!-- <button ion-button block color="danger" (click)="onClose()">Cancel</button> -->
+        </ion-list>
+        
+    </form>
+</ion-content>
